@@ -14,6 +14,8 @@ using TaskManager.Services;
 using System;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Interfaces;
+using TaskManager.Interfaces.IRepositories;
+using TaskManager.Interfaces.IServices;
 
 namespace TaskManager
 {
@@ -32,6 +34,7 @@ namespace TaskManager
                    services.AddDbContext<TaskManagerDbContext>();
 
                    services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
+                   services.AddScoped<IUserRepository, UserRepository>();
                    services.AddScoped<IUserService, UserService>();
                });
 

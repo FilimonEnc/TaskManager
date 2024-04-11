@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TaskManager.Repositories
+namespace TaskManager.Interfaces.IRepositories
 {
     public interface IRepository<T>
     {

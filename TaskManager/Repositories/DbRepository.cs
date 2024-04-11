@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 using TaskManager.DbContexts;
 using TaskManager.Exceptions;
+using TaskManager.Interfaces.IRepositories;
 
 namespace TaskManager.Repositories
 {
-    public class DbRepository<T> : IRepository<T> where T : class
+    public abstract class DbRepository<T> : IRepository<T> where T : class
     {
         private TaskManagerDbContext DbContext { get; init; }
 
@@ -17,7 +18,7 @@ namespace TaskManager.Repositories
             DbContext = dbContext;
         }
 
-        public async Task Add(T entity)
+        public virtual async Task Add(T entity)
         {
             await DbContext.Set<T>().AddAsync(entity);
         }
