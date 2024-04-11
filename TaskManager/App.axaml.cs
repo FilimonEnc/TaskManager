@@ -13,6 +13,7 @@ using TaskManager.Repositories;
 using TaskManager.Services;
 using System;
 using Microsoft.EntityFrameworkCore;
+using TaskManager.Interfaces;
 
 namespace TaskManager
 {
@@ -30,8 +31,8 @@ namespace TaskManager
                {
                    services.AddDbContext<TaskManagerDbContext>();
 
-                   services.AddScoped<IUserRepository, UserRepository>();
-                   services.AddScoped<ITaskManagerService, TaskManagerService>();
+                   services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
+                   services.AddScoped<IUserService, UserService>();
                });
 
             Program.Host = builder.Build();
