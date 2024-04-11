@@ -35,12 +35,15 @@ namespace TaskManager.Presentation
                    services.AddDbContext<TaskManagerDbContext>();
 
                    //services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
-
+                
                    services.AddScoped<IUserRepository, UserRepository>();
                    services.AddScoped<IUserService, UserService>();
+
+                   services.AddScoped<MainWindowViewModel>();
                });
 
             Program.Host = builder.Build();
+            var mainVm = Program.Host.Services.GetRequiredService<MainWindowViewModel>();
 
             Scoped.Run((TaskManagerDbContext dbContext) =>
             {
@@ -63,7 +66,7 @@ namespace TaskManager.Presentation
                 BindingPlugins.DataValidators.RemoveAt(0);
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = mainVm,
                 };
             }
 

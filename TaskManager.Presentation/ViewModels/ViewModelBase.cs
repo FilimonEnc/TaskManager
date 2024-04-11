@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
 using System.Collections.Generic;
 using System.Reflection;
 using System;

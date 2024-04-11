@@ -12,17 +12,17 @@
 	<!-- Боковое меню -->
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Left" Width="200" Background="Gray">
-			<Button HorizontalAlignment="Stretch" Margin="5">
+			<Button HorizontalAlignment="Stretch" Margin="5" Command="{Binding OpenUserListPageCommand}" >
 				<TextBlock Text="Пользователи" HorizontalAlignment="Center"/>
 			</Button>
 			
-			<Button HorizontalAlignment="Stretch" Margin="5">
-				<TextBlock Text="Таски" HorizontalAlignment="Center"/>
+			<Button HorizontalAlignment="Stretch" Margin="5" Command="{Binding OpenNotesListPageCommand}">
+				<TextBlock Text="Заметки" HorizontalAlignment="Center"/>
 			</Button>
 		</StackPanel>
 
 		<!-- Контентная область -->
-		<ContentControl Name="MainFrame" Margin="0.1" Background="Green">
+		<ContentControl Name="MainFrame" Margin="0.1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding ActivePage}">
 			<!-- Здесь будет отображаться выбранный фрейм -->
 		</ContentControl>
 	</DockPanel>

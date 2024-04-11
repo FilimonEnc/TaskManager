@@ -7,6 +7,7 @@ namespace TaskManager.Infrastructure.DbContexts
     public class TaskManagerDbContext : DbContext
     {
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Note> Notes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

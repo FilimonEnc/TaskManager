@@ -14,17 +14,17 @@ namespace TaskManager.ApplicationLayer.Services
             _userRepository = userRepository;
         }
 
-        public async void AddUser(User user)
+        public async Task AddUser(User user)
         {
             await _userRepository.Add(user);
         }
 
-        public async void UpdateUser(User user)
+        public async Task UpdateUser(User user)
         {
             await _userRepository.Update(user);
         }
 
-        public async void DeleteUser(User user)
+        public async Task DeleteUser(User user)
         {
             await _userRepository.Delete(user);
         }

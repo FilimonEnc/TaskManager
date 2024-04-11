@@ -22,6 +22,7 @@ namespace TaskManager.Infrastructure.Repositories
             DbContext = dbContext;
         }
 
+        //TODO: перенести логику в сервис
         public async Task<UserModel> Login(string login, string password)
         {
             var user = await DbContext.Users.SingleOrDefaultAsync(u => u.Login == login && u.Password == HashPassword(password));
@@ -33,7 +34,7 @@ namespace TaskManager.Infrastructure.Repositories
 
         public override async Task Add(User entity)
         {
-            var user = DbContext.Users.First(u => u.Login == entity.Login || u.Name == entity.Name);
+            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Login == entity.Login || u.Name == entity.Name);
             if (user != null)
                 throw new ForbiddenException("Пользователь с такими данными уже существует");
 

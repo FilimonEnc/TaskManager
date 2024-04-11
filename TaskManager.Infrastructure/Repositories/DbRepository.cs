@@ -19,6 +19,7 @@ namespace TaskManager.Infrastructure.Repositories
         public virtual async Task Add(T entity)
         {
             await DbContext.Set<T>().AddAsync(entity);
+            await DbContext.SaveChangesAsync();
         }
 
         public async Task<T> Update(T entity)
@@ -35,7 +36,7 @@ namespace TaskManager.Infrastructure.Repositories
             T? TEntity = await DbContext.Set<T>().FindAsync(entity);
 
             if (TEntity == null)
-                throw new NotFoundException("Не возможно удалить, т.к. эта запись отсутствует в базе");
+                throw new NotFoundException("?? ???????? ???????, ?.?. ??? ?????? ??????????? ? ????");
 
             DbContext.Set<T>().Remove(entity);
             await DbContext.SaveChangesAsync();
@@ -46,7 +47,7 @@ namespace TaskManager.Infrastructure.Repositories
             T? TEntity = await DbContext.Set<T>().FindAsync(id);
 
             if (TEntity == null)
-                throw new NotFoundException("Запись не найдена");
+                throw new NotFoundException("?????? ?? ???????");
 
             return TEntity;
         }
