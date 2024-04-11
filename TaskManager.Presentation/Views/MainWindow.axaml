@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TaskManager.Presentation.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TaskManager.Presentation.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="TaskManager.Presentation">
+
+	<!-- Боковое меню -->
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Left" Width="200" Background="Gray">
+			<Button HorizontalAlignment="Stretch" Margin="5">
+				<TextBlock Text="Пользователи" HorizontalAlignment="Center"/>
+			</Button>
+			
+			<Button HorizontalAlignment="Stretch" Margin="5">
+				<TextBlock Text="Таски" HorizontalAlignment="Center"/>
+			</Button>
+		</StackPanel>
+
+		<!-- Контентная область -->
+		<ContentControl Name="MainFrame" Margin="0.1" Background="Green">
+			<!-- Здесь будет отображаться выбранный фрейм -->
+		</ContentControl>
+	</DockPanel>
+</Window>

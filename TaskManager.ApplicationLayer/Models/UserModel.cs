@@ -1,25 +1,24 @@
-namespace TaskManager.Core.Entities
+п»їnamespace TaskManager.ApplicationLayer.Models
 {
-    public class User : BaseEntity
+    public class UserModel : BaseModel
     {
         /// <summary>
-        /// Имя пользователя
+        /// РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         /// </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Логин
+        /// Р›РѕРіРёРЅ
         /// </summary>
         public string Login { get; set; } = string.Empty;
 
         /// <summary>
-        /// Пароль
-        /// </summary>
-        public string Password { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Путь к иконке пользователя
+        /// РџСѓС‚СЊ Рє РёРєРѕРЅРєРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         /// </summary>
         public string IconPath { get; set; } = string.Empty;
+
+
+        //[JsonIgnore]
+        //public Image IconUser { get; set; } = null!;
     }
 }

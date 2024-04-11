@@ -3,11 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager", "TaskManager\TaskManager.csproj", "{9978918B-7BC1-4DCE-998F-A821F7B18A01}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C6DF3A2-01D0-4E1A-B7A9-A18388D6BD81}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Core", "TaskManager.Core\TaskManager.Core.csproj", "{055A3B3C-5EEA-4342-9874-E388FD80C375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Infrastructure", "TaskManager.Infrastructure\TaskManager.Infrastructure.csproj", "{90D37A94-4880-4882-BB6B-F88B73F099B0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{055A3B3C-5EEA-4342-9874-E388FD80C375} = {055A3B3C-5EEA-4342-9874-E388FD80C375}
+		{7248DEDA-4DC1-4689-8E97-B656F169654D} = {7248DEDA-4DC1-4689-8E97-B656F169654D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.ApplicationLayer", "TaskManager.ApplicationLayer\TaskManager.ApplicationLayer.csproj", "{7248DEDA-4DC1-4689-8E97-B656F169654D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{055A3B3C-5EEA-4342-9874-E388FD80C375} = {055A3B3C-5EEA-4342-9874-E388FD80C375}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Presentation", "TaskManager.Presentation\TaskManager.Presentation.csproj", "{6661285A-FFBF-4D27-B44E-14BF92A999E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7248DEDA-4DC1-4689-8E97-B656F169654D} = {7248DEDA-4DC1-4689-8E97-B656F169654D}
+		{90D37A94-4880-4882-BB6B-F88B73F099B0} = {90D37A94-4880-4882-BB6B-F88B73F099B0}
 	EndProjectSection
 EndProject
 Global
@@ -16,10 +33,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9978918B-7BC1-4DCE-998F-A821F7B18A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9978918B-7BC1-4DCE-998F-A821F7B18A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9978918B-7BC1-4DCE-998F-A821F7B18A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9978918B-7BC1-4DCE-998F-A821F7B18A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055A3B3C-5EEA-4342-9874-E388FD80C375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055A3B3C-5EEA-4342-9874-E388FD80C375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055A3B3C-5EEA-4342-9874-E388FD80C375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055A3B3C-5EEA-4342-9874-E388FD80C375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D37A94-4880-4882-BB6B-F88B73F099B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D37A94-4880-4882-BB6B-F88B73F099B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D37A94-4880-4882-BB6B-F88B73F099B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D37A94-4880-4882-BB6B-F88B73F099B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7248DEDA-4DC1-4689-8E97-B656F169654D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7248DEDA-4DC1-4689-8E97-B656F169654D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7248DEDA-4DC1-4689-8E97-B656F169654D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7248DEDA-4DC1-4689-8E97-B656F169654D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6661285A-FFBF-4D27-B44E-14BF92A999E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6661285A-FFBF-4D27-B44E-14BF92A999E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6661285A-FFBF-4D27-B44E-14BF92A999E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6661285A-FFBF-4D27-B44E-14BF92A999E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

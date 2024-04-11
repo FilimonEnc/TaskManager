@@ -1,20 +1,22 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 
-using TaskManager.Presentation.ViewModels;
-using TaskManager.Presentation.Views;
-using TaskManager.Infrastructure.DbContexts;
-using TaskManager.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+using System;
+
 using TaskManager.ApplicationLayer.Interfaces.IRepositories;
 using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Services;
-
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using System;
+using TaskManager.Infrastructure.DbContexts;
+using TaskManager.Infrastructure.Repositories;
+using TaskManager.Presentation.ViewModels;
+using TaskManager.Presentation.Views;
 
 namespace TaskManager.Presentation
 {

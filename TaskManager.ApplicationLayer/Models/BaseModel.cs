@@ -1,17 +1,17 @@
-﻿namespace TaskManager.Core.Entities
+﻿using System;
+
+namespace TaskManager.ApplicationLayer.Models
 {
-    public abstract class BaseEntity
+    public abstract class BaseModel
     {
         /// <summary>
         /// Идентификатор записи
         /// </summary>
-        public int Id { get; set; }
-
+        public virtual int Id { get; set; }
         /// <summary>
         /// Дата создания записи
         /// </summary>
         public DateTime CreatedDate { get; set; }
-
         /// <summary>
         /// Дата изменения записи
         /// </summary>

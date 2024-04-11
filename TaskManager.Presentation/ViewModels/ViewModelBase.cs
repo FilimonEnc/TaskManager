@@ -1,17 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-using Microsoft.Extensions.DependencyInjection;
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System;
+using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace TaskManager.Presentation.ViewModels
 {
     public class ViewModelBase : ObservableObject, IDisposable
     {
-        public IServiceScope ServiceScope { get; private set; }
+        public IServiceScope ServiceScope { get; private set; } = null!;
 
         static public T Create<T>() where T : ViewModelBase
         {
