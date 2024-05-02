@@ -18,7 +18,5 @@
         public string IconPath { get; set; } = string.Empty;
 
 
-        //[JsonIgnore]
-        //public Image IconUser { get; set; } = null!;
     }
 }

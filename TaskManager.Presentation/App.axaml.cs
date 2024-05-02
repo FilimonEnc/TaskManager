@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using System;
-
+using Avalonia.Controls;
 using TaskManager.ApplicationLayer.Interfaces.IRepositories;
 using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Services;
@@ -26,7 +26,7 @@ namespace TaskManager.Presentation
         {
             AvaloniaXamlLoader.Load(this);
         }
-
+        
         public override void OnFrameworkInitializationCompleted()
         {
             IHostBuilder builder = new HostBuilder()
@@ -38,12 +38,12 @@ namespace TaskManager.Presentation
                 
                    services.AddScoped<IUserRepository, UserRepository>();
                    services.AddScoped<IUserService, UserService>();
-
-                   services.AddScoped<MainWindowViewModel>();
+                   services.AddScoped<TaskManagerDbContext>();
+                   //services.AddScoped<MainWindowViewModel>();
                });
 
             Program.Host = builder.Build();
-            var mainVm = Program.Host.Services.GetRequiredService<MainWindowViewModel>();
+          //  var mainVm = Program.Host.Services.GetRequiredService<MainWindowViewModel>();
 
             Scoped.Run((TaskManagerDbContext dbContext) =>
             {
@@ -61,13 +61,14 @@ namespace TaskManager.Presentation
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // Line below is needed to remove Avalonia data validation.
-                // Without this line you will get duplicate validations from both Avalonia and CT
                 BindingPlugins.DataValidators.RemoveAt(0);
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = mainVm,
-                };
+                
+                desktop.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                var mainWindow = new MainWindow();
+                desktop.MainWindow = mainWindow;
+                desktop.MainWindow.DataContext = new MainWindowViewModel(new UserService(new UserRepository(new TaskManagerDbContext())));
+                
+                
             }
 
             base.OnFrameworkInitializationCompleted();

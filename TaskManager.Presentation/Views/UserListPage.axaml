@@ -2,7 +2,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TaskManager.Presentation.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TaskManager.Presentation.UserListPage">
-  Пользователи
+             x:Class="TaskManager.Presentation.UserListPage"
+             x:DataType="vm:UserListPageViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Row="1">
+           
+                <ListBox ItemsSource="{Binding Users}" Margin="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                            <Border CornerRadius="4" Padding="4">
+                                
+                                <Border.Styles>
+                                    <Style Selector="Border:pointerover">
+                                        <Setter Property="Background" Value="Blue"/>
+                                    </Style>
+                                </Border.Styles>
+                                
+                                <Button Command="{Binding $parent.((vm:UserListPageViewModel)DataContext).SelectUser}">
+                                    <Image Source="{Binding IconPath}"/>
+                                </Button>
+                            </Border>
+                                
+                            <TextBlock Text="{Binding Name}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            
+        </Grid>
+        
+        
+        
+    </Grid>
+    
 </UserControl>

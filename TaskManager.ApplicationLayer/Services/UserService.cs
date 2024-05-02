@@ -1,4 +1,5 @@
-﻿using TaskManager.ApplicationLayer.Interfaces.IServices;
+﻿using Mapster;
+using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Interfaces.IRepositories;
 using TaskManager.Core.Entities;
 using TaskManager.ApplicationLayer.Models;
@@ -27,6 +28,12 @@ namespace TaskManager.ApplicationLayer.Services
         public async Task DeleteUser(User user)
         {
             await _userRepository.Delete(user);
+        }
+
+        public async Task<List<UserModel>> GetUsers()
+        {
+            var users = await _userRepository.GetAll();
+            return users.Adapt<List<UserModel>>();
         }
 
         public async Task<UserModel> Authorization(string login, string password)

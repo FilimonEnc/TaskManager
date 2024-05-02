@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.Core.Entities;
 using TaskManager.Infrastructure.Exceptions;
@@ -14,7 +17,7 @@ namespace TaskManager.Presentation.ViewModels
     {
         private IUserService UserService { get; init; }
 
-        [ObservableProperty] private object _activePage = null!;
+        [ObservableProperty] private UserControl _activePage = null!;
 
         public MainWindowViewModel(IUserService userService)
         {
@@ -29,18 +32,10 @@ namespace TaskManager.Presentation.ViewModels
         }
 
         [RelayCommand]
-        private async Task OpenUserListPage(CancellationToken cancellationToken)
+        private Task OpenUserListPage()
         {
-            ActivePage = new UserListPage();
-                await UserService.AddUser(new User()
-                {
-                    Login = "user",
-                    Name = "user",
-                    Password = "user",
-                    IconPath = "user"
-                });
-            
-
+            ActivePage = new UserListPage(new UserListPageViewModel(UserService));
+            return null!;
         }
     }
 }
