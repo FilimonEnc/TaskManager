@@ -21,15 +21,14 @@ namespace TaskManager.Infrastructure.Repositories
         {
             DbContext = dbContext;
         }
-
-        //TODO: перенести логику в сервис
-        public async Task<UserModel> Login(string login, string password)
+        
+        public async Task<User?> Login(string login, string password)
         {
-            var user = await DbContext.Users.SingleOrDefaultAsync(u => u.Login == login && u.Password == HashPassword(password));
-            if (user == null)
-                throw new ForbiddenException("Не верные данные авторизации");
-
-            return user.Adapt<UserModel>();
+            var user = await DbContext.Users.FirstOrDefaultAsync(
+                u => 
+                    u.Login == login && 
+                    u.Password == HashPassword(password));
+            return user;
         }
 
         public override async Task Add(User entity)
@@ -39,16 +38,9 @@ namespace TaskManager.Infrastructure.Repositories
                 throw new ForbiddenException("Пользователь с такими данными уже существует");
 
             await base.Add(entity);
-
-            //var box = MessageBoxManager
-            //.GetMessageBoxStandard("Успех", "Пользователь успешно создан!",
-            //    ButtonEnum.Ok);
-
-            //await box.ShowAsync();
-
         }
 
-        private string HashPassword(string password)
+        private static string HashPassword(string password)
         {
             byte[] data = Encoding.Default.GetBytes(password);
             using (SHA256 sha256 = SHA256.Create())

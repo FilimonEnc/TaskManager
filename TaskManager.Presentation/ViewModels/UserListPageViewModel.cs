@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TaskManager.ApplicationLayer.Exceptions;
 using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Models;
 
@@ -14,19 +15,20 @@ namespace TaskManager.Presentation.ViewModels
 
         [ObservableProperty] private List<UserModel> _users = new();
 
-        private readonly Func<Task> getUsers;
+        private readonly Func<Task> _getUsers;
 
         public UserListPageViewModel(IUserService userService)
         {
             UserService = userService;
 
-            getUsers = GetUsers;
-            getUsers.Invoke();
+            _getUsers = GetUsers;
+            _getUsers.Invoke();
         }
 
         private async Task GetUsers()
         {
-            Users = new(await UserService.GetUsers());
+            var result = await UserService.GetUsers();
+            Users = new(result.Value);
         }
 
         [RelayCommand]

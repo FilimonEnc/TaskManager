@@ -1,8 +1,11 @@
 ﻿using Mapster;
+using TaskManager.ApplicationLayer.Exceptions;
+using TaskManager.ApplicationLayer.Exceptions.User;
 using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Interfaces.IRepositories;
 using TaskManager.Core.Entities;
 using TaskManager.ApplicationLayer.Models;
+using System.Collections.Generic;
 
 namespace TaskManager.ApplicationLayer.Services
 {
@@ -15,30 +18,34 @@ namespace TaskManager.ApplicationLayer.Services
             _userRepository = userRepository;
         }
 
-        public async Task AddUser(User user)
+        public async Task<Result> AddUser(User user)
         {
             await _userRepository.Add(user);
+            return Result.Success();
         }
 
-        public async Task UpdateUser(User user)
+        public async Task<Result> UpdateUser(User user)
         {
             await _userRepository.Update(user);
+            return Result.Success();
         }
 
-        public async Task DeleteUser(User user)
+        public async Task<Result> DeleteUser(User user)
         {
             await _userRepository.Delete(user);
+            return Result.Success();
         }
 
-        public async Task<List<UserModel>> GetUsers()
+        public async Task<Result<List<UserModel>>> GetUsers()
         {
             var users = await _userRepository.GetAll();
-            return users.Adapt<List<UserModel>>();
+            return Result<List<UserModel>>.Success(users.Adapt<List<UserModel>>());
         }
 
-        public async Task<UserModel> Authorization(string login, string password)
+        public async Task<Result> Authorization(string login, string password)
         {
-            return await _userRepository.Login(login, password);
+            var user =  await _userRepository.Login(login, password);
+            return user == null ? Result.Failure(UserError.UserIncorrect) : Result.Success();
         }
 
 

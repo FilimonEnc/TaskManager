@@ -1,14 +1,15 @@
-﻿using TaskManager.ApplicationLayer.Models;
+﻿using TaskManager.ApplicationLayer.Exceptions;
+using TaskManager.ApplicationLayer.Models;
 using TaskManager.Core.Entities;
 
 namespace TaskManager.ApplicationLayer.Interfaces.IServices
 {
     public interface IUserService
     {
-        Task AddUser(User user);
-        Task UpdateUser(User user);
-        Task DeleteUser(User user);
-        Task<List<UserModel>> GetUsers();
-        Task<UserModel> Authorization(string login, string password);
+        Task<Result> AddUser(User user);
+        Task<Result> UpdateUser(User user);
+        Task<Result> DeleteUser(User user);
+        Task<Result<List<UserModel>>> GetUsers();
+        Task<Result> Authorization(string login, string password);
     }
 }
