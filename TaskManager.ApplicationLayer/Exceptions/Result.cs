@@ -20,6 +20,9 @@ public class Result
 
     public static Result Success() => new(true, Error.None);
     public static Result Failure(Error error) => new(false, error);
+    
+    public static implicit operator Result(Error error) => Result.Failure(error);
+
 }
 
 public class Result<T> : Result
@@ -33,6 +36,11 @@ public class Result<T> : Result
     }
 
     public static Result<T> Success(T value) => new(true, Error.None, value);
+    
+    public static implicit operator Result<T>(Error error) => new(false, error, default(T));
+    
+    public static implicit operator Result<T>(T value) => new(true, Error.None, value);
+
 }
 
 

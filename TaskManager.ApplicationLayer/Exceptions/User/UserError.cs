@@ -1,3 +1,5 @@
+using TaskManager.ApplicationLayer.Models;
+
 namespace TaskManager.ApplicationLayer.Exceptions.User;
 
 public static class UserError

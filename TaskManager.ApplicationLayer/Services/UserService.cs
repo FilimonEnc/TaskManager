@@ -5,7 +5,6 @@ using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Interfaces.IRepositories;
 using TaskManager.Core.Entities;
 using TaskManager.ApplicationLayer.Models;
-using System.Collections.Generic;
 
 namespace TaskManager.ApplicationLayer.Services
 {
