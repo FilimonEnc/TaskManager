@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using TaskManager.ApplicationLayer.Exceptions;
+
 using TaskManager.ApplicationLayer.Interfaces.IServices;
 using TaskManager.ApplicationLayer.Models;
 
@@ -25,6 +26,7 @@ namespace TaskManager.Presentation.ViewModels
             _getUsers.Invoke();
         }
 
+        [RelayCommand]
         private async Task GetUsers()
         {
             var result = await UserService.GetUsers();

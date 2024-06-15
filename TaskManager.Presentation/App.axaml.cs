@@ -26,7 +26,7 @@ namespace TaskManager.Presentation
         {
             AvaloniaXamlLoader.Load(this);
         }
-        
+
         public override void OnFrameworkInitializationCompleted()
         {
             IHostBuilder builder = new HostBuilder()
@@ -35,15 +35,18 @@ namespace TaskManager.Presentation
                    services.AddDbContext<TaskManagerDbContext>();
 
                    //services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
-                
+
                    services.AddScoped<IUserRepository, UserRepository>();
                    services.AddScoped<IUserService, UserService>();
                    services.AddScoped<TaskManagerDbContext>();
-                   //services.AddScoped<MainWindowViewModel>();
+                   services.AddScoped<MainWindowViewModel>();
+                   services.AddScoped<UserListPageViewModel>();
+                   services.AddScoped<NotesListPageViewModel>();
                });
 
+
             Program.Host = builder.Build();
-          //  var mainVm = Program.Host.Services.GetRequiredService<MainWindowViewModel>();
+            var mainVm = Program.Host.Services.GetRequiredService<MainWindowViewModel>();
 
             Scoped.Run((TaskManagerDbContext dbContext) =>
             {
@@ -62,13 +65,13 @@ namespace TaskManager.Presentation
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 BindingPlugins.DataValidators.RemoveAt(0);
-                
+
                 desktop.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                var mainWindow = new MainWindow();
+                var mainWindow = new MainWindow()
+                {
+                    DataContext = mainVm
+                };
                 desktop.MainWindow = mainWindow;
-                desktop.MainWindow.DataContext = new MainWindowViewModel(new UserService(new UserRepository(new TaskManagerDbContext())));
-                
-                
             }
 
             base.OnFrameworkInitializationCompleted();

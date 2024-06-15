@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="TaskManager.Presentation/App.axaml" value="TaskManager.Presentation/TaskManager.Presentation.csproj" />
+        <entry key="TaskManager.Presentation/Views/MainWindow.axaml" value="TaskManager.Presentation/TaskManager.Presentation.csproj" />
+        <entry key="TaskManager.Presentation/Views/NotesListPage.axaml" value="TaskManager.Presentation/TaskManager.Presentation.csproj" />
+        <entry key="TaskManager.Presentation/Views/UserListPage.axaml" value="TaskManager.Presentation/TaskManager.Presentation.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

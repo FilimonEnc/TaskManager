@@ -33,6 +33,7 @@
                             </Border>
                                 
                             <TextBlock Text="{Binding Name}" FontSize="12"/>
+								<TextBlock Text ="Чел"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

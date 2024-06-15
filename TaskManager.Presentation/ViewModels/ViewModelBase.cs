@@ -43,6 +43,7 @@ namespace TaskManager.Presentation.ViewModels
         {
             ServiceScope.Dispose();
         }
+
     }
 
     public class Scoped
@@ -96,5 +97,7 @@ namespace TaskManager.Presentation.ViewModels
 
             return services;
         }
+
+        
     }
 }
