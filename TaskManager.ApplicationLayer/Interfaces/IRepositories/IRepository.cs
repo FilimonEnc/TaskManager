@@ -1,4 +1,6 @@
-﻿namespace TaskManager.ApplicationLayer.Interfaces.IRepositories
+﻿using TaskManager.Core.Entities;
+
+namespace TaskManager.ApplicationLayer.Interfaces.IRepositories
 {
     public interface IRepository<T>
     {

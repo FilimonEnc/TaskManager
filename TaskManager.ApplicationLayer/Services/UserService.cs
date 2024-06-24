@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using System.Security.Cryptography;
+using System.Text;
+using Mapster;
 using TaskManager.ApplicationLayer.Exceptions;
 using TaskManager.ApplicationLayer.Exceptions.User;
 using TaskManager.ApplicationLayer.Interfaces.IServices;
@@ -19,7 +21,10 @@ namespace TaskManager.ApplicationLayer.Services
 
         public async Task<Result> AddUser(User user)
         {
-            await _userRepository.Add(user);
+            user.Password = MakeHash(user.Password);
+            var userFinal = await _userRepository.Add(user);
+            if (userFinal == null)
+                return Result.Failure(UserError.UserAllReadyHave);
             return Result.Success();
         }
 
@@ -43,8 +48,19 @@ namespace TaskManager.ApplicationLayer.Services
 
         public async Task<Result> Authorization(string login, string password)
         {
-            var user =  await _userRepository.Login(login, password);
+            string hashPassword = MakeHash(password);
+            var user =  await _userRepository.Login(login, hashPassword);
             return user == null ? Result.Failure(UserError.UserIncorrect) : Result.Success();
+        }
+        
+        private static string MakeHash(string password)
+        {
+            byte[] data = Encoding.Default.GetBytes(password);
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] result = sha256.ComputeHash(data);
+                return Convert.ToBase64String(result);
+            }
         }
 
 

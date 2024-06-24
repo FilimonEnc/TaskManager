@@ -7,16 +7,11 @@ namespace TaskManager.Infrastructure.DbContexts
     public class TaskManagerDbContext : DbContext
     {
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Note> Notes { get; set; }
+        public virtual DbSet<Reminder> Reminders { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            options.UseSqlite("Data Source=TaskManagerApp.db");
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+            optionsBuilder.UseSqlite("Data Source=TaskManagerApp.db");
         }
     }
 }

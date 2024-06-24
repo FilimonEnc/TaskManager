@@ -1,10 +1,8 @@
 ﻿using Mapster;
-
 using Microsoft.EntityFrameworkCore;
-
 using System.Security.Cryptography;
 using System.Text;
-
+using Microsoft.Extensions.Logging.Abstractions;
 using TaskManager.ApplicationLayer.Interfaces.IRepositories;
 using TaskManager.ApplicationLayer.Models;
 using TaskManager.Core.Entities;
@@ -21,33 +19,26 @@ namespace TaskManager.Infrastructure.Repositories
         {
             DbContext = dbContext;
         }
-        
+
         public async Task<User?> Login(string login, string password)
         {
             var user = await DbContext.Users.FirstOrDefaultAsync(
-                u => 
-                    u.Login == login && 
-                    u.Password == HashPassword(password));
+                u =>
+                    u.Login == login &&
+                    u.Password == password);
             return user;
         }
 
-        public override async Task Add(User entity)
+        public override async Task<User?> Add(User entity)
         {
-            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Login == entity.Login || u.Name == entity.Name);
+            User? user =
+                await DbContext.Users.FirstOrDefaultAsync(u => u.Login == entity.Login || u.Name == entity.Name);
+
             if (user != null)
-                throw new ForbiddenException("Пользователь с такими данными уже существует");
+                return null;
 
             await base.Add(entity);
-        }
-
-        private static string HashPassword(string password)
-        {
-            byte[] data = Encoding.Default.GetBytes(password);
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] result = sha256.ComputeHash(data);
-                return Convert.ToBase64String(result);
-            }
+            return entity;
         }
     }
 }

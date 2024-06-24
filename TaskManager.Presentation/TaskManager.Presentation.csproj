@@ -27,4 +27,8 @@
   <ItemGroup>
     <ProjectReference Include="..\TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Tasks\ReminderWidget.axaml" />
+  </ItemGroup>
 </Project>

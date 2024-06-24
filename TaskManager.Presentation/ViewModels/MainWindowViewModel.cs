@@ -22,7 +22,7 @@ namespace TaskManager.Presentation.ViewModels
             UserService = userService;
         }
 
-        private protected void SetActivePage<TViewModel, TPage>()
+        protected internal void SetActivePage<TViewModel, TPage>()
         where TViewModel : ViewModelBase
         where TPage : UserControl, new()
         {

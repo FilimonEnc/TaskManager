@@ -16,12 +16,20 @@ using TaskManager.ApplicationLayer.Services;
 using TaskManager.Infrastructure.DbContexts;
 using TaskManager.Infrastructure.Repositories;
 using TaskManager.Presentation.ViewModels;
+using TaskManager.Presentation.ViewModels.Tasks;
 using TaskManager.Presentation.Views;
+using TaskManager.Presentation.Views.Tasks;
 
 namespace TaskManager.Presentation
 {
     public partial class App : Application
     {
+        /// <summary>
+        /// Активный пользователь программы
+        /// </summary>
+        public static CurrentUser CurrentUser { get; private set; } = new CurrentUser();
+
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -34,14 +42,18 @@ namespace TaskManager.Presentation
                {
                    services.AddDbContext<TaskManagerDbContext>();
 
-                   //services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
-
                    services.AddScoped<IUserRepository, UserRepository>();
                    services.AddScoped<IUserService, UserService>();
                    services.AddScoped<TaskManagerDbContext>();
-                   services.AddScoped<MainWindowViewModel>();
+
+                   services.AddSingleton<MainWindowViewModel>();
+                   services.AddSingleton<MainWindow>();
                    services.AddScoped<UserListPageViewModel>();
                    services.AddScoped<NotesListPageViewModel>();
+                   services.AddScoped<ReminderWidgetViewModel>();
+                   services.AddScoped<ReminderWidget>();
+                   services.AddScoped<RegistrationPage>();
+                   services.AddScoped<RegistrationPageViewModel>();
                });
 
 
